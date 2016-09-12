@@ -1,0 +1,49 @@
+#include<iostream>
+#inculde<vector>
+using namespace std;
+int main(){
+vector<int> arr = {0,0,0,1,1,1,0,0,1,1};
+int arrLength = arr.size();
+vector<int> sum;
+sum.reserve(arrLength+1);
+sum.push_back(0); 
+
+for(const auto& x:arr)
+ {
+  sum.push_back(sum.back()+x*2-1);
+ }
+ 
+ vector<int> record(arrLength*2+1,-1);
+ int maxLen =-1;
+ int startIndex =-1;
+ int endIndex = -1;
+ for(int i =0;i<sum.size();i++)
+ {
+     int index = arrLength+sum[i];
+     if(record[index]==-1)
+     {
+      record[index] = i;
+     }
+     else
+     {
+      int curLen = i - record[index];
+      if(curLen>maxLen)
+       {
+        startIndex = record[index];
+        endIndex = i -1;
+        maxLen = curLen;
+       }
+     }
+   
+ }
+  
+  if(maxLen != -1)
+  {
+  cout<<maxlen<<endl;
+  }
+  else
+  {
+  cout<<"NOT EXIST"<<endl;
+  }
+ 
+}
